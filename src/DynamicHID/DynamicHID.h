@@ -25,6 +25,10 @@
 #include <stdint.h>
 #include <Arduino.h>
 
+#define USB_EP_SIZE                 EPX_SIZE
+#define EP_TYPE_INTERRUPT_IN        USB_ENDPOINT_TYPE_INTERRUPT | USB_ENDPOINT_IN(0);
+#define EP_TYPE_INTERRUPT_OUT       USB_ENDPOINT_TYPE_INTERRUPT | USB_ENDPOINT_OUT(0);
+
 #ifdef _VARIANT_ARDUINO_DUE_X_
   // The following values are the same as AVR's USBAPI.h
   // Reproduced here because SAM doesn't have these in
@@ -34,7 +38,8 @@
 
   #include "USB/PluggableUSB.h"
 #else
-  #include "PluggableUSB.h"
+  #include "api/PluggableUSB.h"
+  #define EPTYPE_DESCRIPTOR_SIZE		unsigned int
 #endif
 
 #if defined(USBCON)
